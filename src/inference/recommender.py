@@ -1,3 +1,5 @@
+import pandas as pd
+
 from pathlib import Path
 
 from src.models.popularity import PopularityRecommender
@@ -35,6 +37,19 @@ class Recommender:
 
         self.data_dir = Path(
             data_dir
+        )
+
+        # User interaction history
+        self.train = pd.read_parquet(
+            self.data_dir / "train.parquet",
+            columns=["user_id", "item_id"]
+        )
+
+        self.user_seen_items = (
+            self.train
+            .groupby("user_id")["item_id"]
+            .apply(set)
+            .to_dict()
         )
 
         # Content-Based Model
@@ -175,6 +190,7 @@ class Recommender:
                 "recommendations": []
             }
 
+        # Explicit exclusions
         if exclude_items is None:
             exclude_items = set()
         else:
@@ -182,6 +198,17 @@ class Recommender:
                 int(item)
                 for item in exclude_items
             }
+
+# Automatically exclude items already seen by the user
+        seen_items = self.user_seen_items.get(
+            user_id,
+            set()
+        )
+
+        exclude_items = (
+            set(exclude_items)
+            | {int(item) for item in seen_items}
+        )
 
         # Warm user
 
