@@ -2,7 +2,12 @@ import requests
 import streamlit as st
 
 
-API_URL = "http://127.0.0.1:8000"
+import os
+
+API_URL = os.getenv(
+    "API_URL",
+    "http://127.0.0.1:8000"
+)
 
 
 # Page configuration
@@ -233,8 +238,7 @@ with st.sidebar:
         st.error("● API Offline")
 
     st.caption(
-        "FastAPI backend: "
-        "127.0.0.1:8000"
+        f"FastAPI backend: {API_URL}"
     )
 
 
@@ -260,9 +264,7 @@ if st.button(
 
     try:
 
-        # -------------------------------------------------
         # API request
-        # -------------------------------------------------
 
         if mode == "Personalized":
 
@@ -285,9 +287,7 @@ if st.button(
                 timeout=30
             )
 
-        # -------------------------------------------------
         # Error handling
-        # -------------------------------------------------
 
         if response.status_code != 200:
 
@@ -312,17 +312,13 @@ if st.button(
             "strategy"
         ]
 
-        # =================================================
         # Results header
-        # =================================================
 
         st.subheader(
             "Recommendation Results"
         )
 
-        # =================================================
         # Metrics
-        # =================================================
 
         col1, col2, col3 = st.columns(3)
 
@@ -380,9 +376,7 @@ if st.button(
                 unsafe_allow_html=True
             )
 
-        # =================================================
         # Strategy explanation
-        # =================================================
 
         if strategy == "hybrid":
 
@@ -444,9 +438,7 @@ if st.button(
             unsafe_allow_html=True
         )
 
-        # =================================================
         # Recommendation list
-        # =================================================
 
         st.subheader(
             "Recommended Items"
