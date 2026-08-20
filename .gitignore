@@ -67,5 +67,9 @@ data/raw/*.csv
 data/processed/*.parquet
 data/processed/*.csv
 
+# Required inference-time data
+!data/processed/train.parquet
+!data/processed/item_categories.parquet
+
 # Keep lightweight metadata if needed
 !data/processed/.gitkeep
