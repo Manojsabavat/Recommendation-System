@@ -1,0 +1,2 @@
+content_weight,bpr_weight,popularity_weight,validation_ndcg_at_10,test_ndcg_at_10
+0.4,0.4,0.2,0.019391,0.015367

@@ -1,0 +1,71 @@
+# Python
+
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+.venv/
+venv/
+env/
+ENV/
+
+# Testing
+
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+
+# Jupyter
+
+.ipynb_checkpoints/
+
+# Streamlit
+
+.streamlit/secrets.toml
+
+# IDE
+
+.vscode/
+.idea/
+
+# OS
+
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+
+*.log
+
+# Temporary files
+
+*.tmp
+*.temp
+
+# Python packaging
+
+*.egg-info/
+dist/
+build/
+
+# Local environment
+
+.env
+.env.*
+
+# Model/runtime temporary files
+
+*.lock
+
+# Large recommendation-system datasets
+
+data/raw/*.csv
+data/processed/*.parquet
+data/processed/*.csv
+
+# Keep lightweight metadata if needed
+!data/processed/.gitkeep
