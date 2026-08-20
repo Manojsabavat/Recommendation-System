@@ -37,9 +37,7 @@ class Recommender:
             data_dir
         )
 
-        # =================================================
         # Content-Based Model
-        # =================================================
 
         self.content_model = (
             ContentBasedRecommender(
@@ -62,28 +60,16 @@ class Recommender:
             )
         )
 
-        # =================================================
         # BPR Model
-        # =================================================
 
         self.bpr_model = BPRRecommender(
             str(
                 self.models_dir
                 / "bpr_model.pt"
-            ),
-            str(
-                self.models_dir
-                / "bpr_user_ids.npy"
-            ),
-            str(
-                self.models_dir
-                / "bpr_item_ids.npy"
             )
         )
 
-        # =================================================
         # Popularity Model
-        # =================================================
 
         self.popularity_model = (
             PopularityRecommender()
@@ -96,9 +82,7 @@ class Recommender:
             )
         )
 
-        # =================================================
         # Hybrid Model
-        # =================================================
 
         self.hybrid_model = HybridRecommender(
             content_model=self.content_model,
@@ -109,9 +93,7 @@ class Recommender:
             popularity_weight=0.2
         )
 
-        # =================================================
         # Cold-Item Category Model
-        # =================================================
 
         self.cold_item_model = (
             ColdItemCategoryRecommender(
@@ -131,9 +113,7 @@ class Recommender:
             )
         )
 
-        # =================================================
         # User Sets
-        # =================================================
 
         self.content_users = {
             int(user_id)
@@ -203,9 +183,7 @@ class Recommender:
                 for item in exclude_items
             }
 
-        # -----------------------------------------------
         # Warm user
-        # -----------------------------------------------
 
         if user_id in self.warm_users:
 
@@ -223,9 +201,7 @@ class Recommender:
                 "recommendations": recommendations
             }
 
-        # -----------------------------------------------
         # Cold user
-        # -----------------------------------------------
 
         recommendations = (
             self.popularity_model.recommend(

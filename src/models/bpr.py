@@ -8,8 +8,6 @@ class BPRRecommender:
     def __init__(
         self,
         model_path,
-        user_ids_path,
-        item_ids_path,
         device="cpu"
     ):
         self.device = torch.device(device)
